@@ -20,13 +20,13 @@ jobs:
         include:
           - os: windows-latest
             build_script: build:win
-            artifact_name: rtmp-srt-server-win.exe
+            artifact_name: rtmp-udp-server-win.exe
           - os: macos-latest
             build_script: build:mac
-            artifact_name: rtmp-srt-server-macos
+            artifact_name: rtmp-udp-server-macos
           - os: ubuntu-latest
             build_script: build:linux
-            artifact_name: rtmp-srt-server-linux
+            artifact_name: rtmp-udp-server-linux
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -70,9 +70,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/rtmp-srt-server-win.exe/rtmp-srt-server-win.exe
-            artifacts/rtmp-srt-server-macos/rtmp-srt-server-macos
-            artifacts/rtmp-srt-server-linux/rtmp-srt-server-linux
+            artifacts/rtmp-udp-server-win.exe/rtmp-udp-server-win.exe
+            artifacts/rtmp-udp-server-macos/rtmp-udp-server-macos
+            artifacts/rtmp-udp-server-linux/rtmp-udp-server-linux
           body: |
             ## What's Changed
             * Automatic release from GitHub Actions
