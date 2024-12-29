@@ -10,7 +10,16 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: windows-latest
+            build_script: build:win
+            artifact_name: rtmp-srt-server-win.exe
+          - os: macos-latest
+            build_script: build:mac
+            artifact_name: rtmp-srt-server-macos
+          - os: ubuntu-latest
+            build_script: build:linux
+            artifact_name: rtmp-srt-server-linux
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -24,17 +33,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Build executables
-        run: npm run build
+      - name: Build executable
+        run: |
+          npm run clean
+          npm run ${{ matrix.build_script }}
       
-      - name: Upload artifacts
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: executables-${{ matrix.os }}
-          path: |
-            dist/rtmp-srt-server-win.exe
-            dist/rtmp-srt-server-macos
-            dist/rtmp-srt-server-linux
+          name: ${{ matrix.artifact_name }}
+          path: dist/${{ matrix.artifact_name }}
           if-no-files-found: error
 
   release:
@@ -70,7 +78,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/executables-windows-latest/rtmp-srt-server-win.exe
+          asset_path: ./artifacts/rtmp-srt-server-win.exe/rtmp-srt-server-win.exe
           asset_name: rtmp-srt-server-win.exe
           asset_content_type: application/octet-stream
       
@@ -80,7 +88,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/executables-macos-latest/rtmp-srt-server-macos
+          asset_path: ./artifacts/rtmp-srt-server-macos/rtmp-srt-server-macos
           asset_name: rtmp-srt-server-macos
           asset_content_type: application/octet-stream
 
@@ -90,7 +98,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/executables-ubuntu-latest/rtmp-srt-server-linux
+          asset_path: ./artifacts/rtmp-srt-server-linux/rtmp-srt-server-linux
           asset_name: rtmp-srt-server-linux
           asset_content_type: application/octet-stream
       
