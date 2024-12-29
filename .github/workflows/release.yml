@@ -32,8 +32,9 @@ jobs:
         with:
           name: executables-${{ matrix.os }}
           path: |
-            dist/rtmp-server-win.exe
-            dist/rtmp-server-macos
+            dist/rtmp-srt-server-win.exe
+            dist/rtmp-srt-server-macos
+            dist/rtmp-srt-server-linux
           if-no-files-found: error
 
   release:
@@ -58,7 +59,7 @@ jobs:
           body: |
             ## What's Changed
             * Automatic release from GitHub Actions
-            * Windows and macOS executables included
+            * Windows, macOS, and Linux executables included
             * NPM package published
           draft: false
           prerelease: false
@@ -69,7 +70,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/executables-windows-latest/rtmp-server-win.exe
+          asset_path: ./artifacts/executables-windows-latest/rtmp-srt-server-win.exe
           asset_name: rtmp-srt-server-win.exe
           asset_content_type: application/octet-stream
       
@@ -79,8 +80,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/executables-macos-latest/rtmp-server-macos
+          asset_path: ./artifacts/executables-macos-latest/rtmp-srt-server-macos
           asset_name: rtmp-srt-server-macos
+          asset_content_type: application/octet-stream
+
+      - name: Upload Linux Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./artifacts/executables-ubuntu-latest/rtmp-srt-server-linux
+          asset_name: rtmp-srt-server-linux
           asset_content_type: application/octet-stream
       
       - name: Setup Node.js for publishing
