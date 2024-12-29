@@ -1,4 +1,25 @@
-/build
-/dist
-/node_modules
-/stream_server.spec
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+.env.*.local
