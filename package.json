@@ -1,10 +1,10 @@
 {
-  "name": "@devozdemirhasancan/rtmp-srt-server",
-  "version": "1.0.4",
-  "description": "Simple RTMP to SRT Stream Server",
+  "name": "@devozdemirhasancan/rtmp-udp-server",
+  "version": "1.0.0",
+  "description": "Simple RTMP to UDP Stream Server",
   "main": "server.js",
   "bin": {
-    "rtmp-srt-server": "./server.js"
+    "rtmp-udp-server": "./server.js"
   },
   "pkg": {
     "targets": [
@@ -27,15 +27,15 @@
   "scripts": {
     "start": "node server.js",
     "clean": "rimraf dist",
-    "build:win": "pkg . --targets node18-win-x64 --output dist/rtmp-srt-server-win.exe",
-    "build:mac": "pkg . --targets node18-macos-arm64 --output dist/rtmp-srt-server-macos",
-    "build:linux": "pkg . --targets node18-linux-x64 --output dist/rtmp-srt-server-linux",
+    "build:win": "pkg . --targets node18-win-x64 --output dist/rtmp-udp-server-win.exe",
+    "build:mac": "pkg . --targets node18-macos-arm64 --output dist/rtmp-udp-server-macos",
+    "build:linux": "pkg . --targets node18-linux-x64 --output dist/rtmp-udp-server-linux",
     "build": "npm run clean && npm run build:win && npm run build:mac && npm run build:linux",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
     "rtmp",
-    "srt",
+    "udp",
     "gopro",
     "obs",
     "streaming",
@@ -48,12 +48,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devozdemirhasancan/rtmp-srt-server.git"
+    "url": "git+https://github.com/devozdemirhasancan/rtmp-udp-server.git"
   },
   "bugs": {
-    "url": "https://github.com/devozdemirhasancan/rtmp-srt-server/issues"
+    "url": "https://github.com/devozdemirhasancan/rtmp-udp-server/issues"
   },
-  "homepage": "https://github.com/devozdemirhasancan/rtmp-srt-server#readme",
+  "homepage": "https://github.com/devozdemirhasancan/rtmp-udp-server#readme",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"

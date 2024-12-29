@@ -1,0 +1,62 @@
+{
+  "presets": {
+    "high_quality": {
+      "name": "Yüksek Kalite",
+      "description": "En yüksek kalite, yüksek bitrate (10Mbps)",
+      "ffmpeg_params": [
+        "-c:v",
+        "copy",
+        "-c:a",
+        "copy",
+        "-maxrate",
+        "10M",
+        "-bufsize",
+        "20M",
+        "-preset",
+        "veryfast",
+        "-tune",
+        "zerolatency"
+      ]
+    },
+    "balanced": {
+      "name": "Dengeli",
+      "description": "Orta kalite, dengeli performans (5Mbps)",
+      "ffmpeg_params": [
+        "-c:v",
+        "copy",
+        "-c:a",
+        "copy",
+        "-maxrate",
+        "5M",
+        "-bufsize",
+        "10M",
+        "-preset",
+        "veryfast",
+        "-tune",
+        "zerolatency"
+      ]
+    },
+    "low_latency": {
+      "name": "Düşük Gecikme",
+      "description": "En düşük gecikme, düşük bitrate (3Mbps)",
+      "ffmpeg_params": [
+        "-c:v",
+        "copy",
+        "-c:a",
+        "copy",
+        "-maxrate",
+        "3M",
+        "-bufsize",
+        "6M",
+        "-preset",
+        "ultrafast",
+        "-tune",
+        "zerolatency"
+      ]
+    }
+  },
+  "last_used_preset": "high_quality",
+  "rtmp_port": 7002,
+  "udp_port": 7005,
+  "log_level": "info"
+}
