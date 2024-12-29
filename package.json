@@ -1,6 +1,6 @@
 {
   "name": "@devozdemirhasancan/rtmp-srt-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple RTMP to SRT Stream Server",
   "main": "server.js",
   "bin": {
@@ -58,4 +58,4 @@
   "engines": {
     "node": ">=18.0.0"
   }
-} 
+}
