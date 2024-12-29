@@ -1,0 +1,52 @@
+{
+  "name": "@devozdemirhasancan/rtmp-srt-server",
+  "version": "1.0.0",
+  "description": "Simple RTMP to SRT Stream Server",
+  "main": "server.js",
+  "bin": {
+    "rtmp-srt-server": "./server.js"
+  },
+  "pkg": {
+    "targets": [
+      "node18-win-x64",
+      "node18-macos-arm64"
+    ],
+    "outputPath": "dist"
+  },
+  "dependencies": {
+    "node-media-server": "^2.6.2"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "build": "pkg .",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "rtmp",
+    "srt",
+    "gopro",
+    "obs",
+    "streaming",
+    "ffmpeg"
+  ],
+  "author": {
+    "name": "Hasan Can Özdemir",
+    "email": "devozdemirhasancan@gmail.com",
+    "url": "https://github.com/devozdemirhasancan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devozdemirhasancan/rtmp-srt-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/devozdemirhasancan/rtmp-srt-server/issues"
+  },
+  "homepage": "https://github.com/devozdemirhasancan/rtmp-srt-server#readme",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 
