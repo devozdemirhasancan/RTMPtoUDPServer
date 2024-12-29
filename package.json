@@ -48,12 +48,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devozdemirhasancan/rtmp-udp-server.git"
+    "url": "git+https://github.com/devozdemirhasancan/RTMPtoUDPServer.git"
   },
   "bugs": {
-    "url": "https://github.com/devozdemirhasancan/rtmp-udp-server/issues"
+    "url": "https://github.com/devozdemirhasancan/RTMPtoUDPServer/issues"
   },
-  "homepage": "https://github.com/devozdemirhasancan/rtmp-udp-server#readme",
+  "homepage": "https://github.com/devozdemirhasancan/RTMPtoUDPServer#readme",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
