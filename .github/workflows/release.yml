@@ -6,8 +6,15 @@ on:
       - 'v*'
   workflow_dispatch:
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   build:
+    permissions:
+      contents: read
+      packages: read
     strategy:
       matrix:
         include:
@@ -48,6 +55,9 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
     steps:
       - uses: actions/checkout@v3
       
@@ -57,13 +67,12 @@ jobs:
           path: artifacts
       
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          files: |
+            artifacts/rtmp-srt-server-win.exe/rtmp-srt-server-win.exe
+            artifacts/rtmp-srt-server-macos/rtmp-srt-server-macos
+            artifacts/rtmp-srt-server-linux/rtmp-srt-server-linux
           body: |
             ## What's Changed
             * Automatic release from GitHub Actions
@@ -71,36 +80,6 @@ jobs:
             * NPM package published
           draft: false
           prerelease: false
-      
-      - name: Upload Windows Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/rtmp-srt-server-win.exe/rtmp-srt-server-win.exe
-          asset_name: rtmp-srt-server-win.exe
-          asset_content_type: application/octet-stream
-      
-      - name: Upload macOS Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/rtmp-srt-server-macos/rtmp-srt-server-macos
-          asset_name: rtmp-srt-server-macos
-          asset_content_type: application/octet-stream
-
-      - name: Upload Linux Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts/rtmp-srt-server-linux/rtmp-srt-server-linux
-          asset_name: rtmp-srt-server-linux
-          asset_content_type: application/octet-stream
       
       - name: Setup Node.js for publishing
         uses: actions/setup-node@v3
